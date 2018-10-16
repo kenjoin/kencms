@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {ms:include filename=head-file.htm/}
+    </head>
+    <body>
+        {ms:include filename=head.htm/}
+        <div class="ms-banner" style="background:url({ms:globalskin.url/}images/our_company.jpeg) no-repeat center;">
+            <p class="banner_tit_other animated fadeInLeft">公司动态</p>
+            <p class="banner_tit_other_des animated fadeInRight">Our company</p>
+        </div>
+        <div class="ms-content">
+            <div class="ms-content-new-list">
+                {ms:include filename=menu-left.htm/}
+                <div class="ms-content-right-position">
+                    <a href="{ms:global.host/}">首页</a>
+                    <span>></span>
+                    <a href="{ms:field.typelink/}">公司动态</a>
+                </div>
+                <div class="ms-content-main-list">
+
+                    <div class="ms-content-main-div">
+                        <ul class="ms-content-main-ul">
+                            {ms:arclist size=6 ispaging=true}
+                            <li>
+                                <a href="[field.link/]">
+                                    <!-- <span class="ms-content-main-li-span">·</span> -->
+                                    <span class="ms-content-main-li-title">[field.title/]</span>
+                                    <span class="ms-content-main-li-time">[field.date fmt=yyyy-MM-dd/]</span>
+                                </a>
+                            </li>
+                            {/ms:arclist}
+                        </ul>
+                    </div>
+                    <div class="ms-content-main-page">
+		                <a class="ms-content-main-page-first" href="{ms:page.index/}">首页</a>
+		                <a class="ms-content-main-page-upper" href="{ms:page.pre/}">上一页</a>
+		                <a class="ms-content-main-page-next" href="{ms:page.next/}">下一页</a>
+		                <a class="ms-content-main-page-last" href="{ms:page.last/}">末页</a>
+		            </div>
+                </div>
+            </div>
+            
+        </div>
+        {ms:include filename=footer.htm/}
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+               http://www.springframework.org/schema/context
+               http://www.springframework.org/schema/context/spring-context-4.0.xsd
+               http://www.springframework.org/schema/tx
+               http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+               http://www.springframework.org/schema/aop
+               http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+               http://www.springframework.org/schema/mvc
+        		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<description>spring 包扫描配置文件</description>
+	<context:property-placeholder location="classpath:ms.properties" />
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<context:component-scan base-package="**.parser" />	<!-- 解析器 -->
+	<!-- 控制层 -->
+	<context:component-scan base-package="**.action" />
+	<!-- 实现层 -->
+	<context:component-scan base-package="**.biz.impl" />
+	<!-- 切面控制层 -->
+	<context:component-scan base-package="**.aop" />
+	<!-- 服务类 -->
+	<context:component-scan base-package="**.service" />
+	<!-- 业务调度 -->
+	<context:component-scan base-package="**.job" />
+	<!-- 异常处理 -->
+	<context:component-scan base-package="**.exception" />	
+	<!-- 打开aop 注解 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<mvc:annotation-driven />
+	<!--  bean id="conversionService"
+
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+
+	</bean-->
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.mingsoft.basic.interceptor.ActionInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/people/**" />
+			<bean class="com.mingsoft.people.interceptor.ActionInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 导入其他配置文件 -->
+	<import resource="spring-mybatis.xml" />
+	<import resource="spring-shiro.xml" />
+</beans>

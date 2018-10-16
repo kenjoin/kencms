@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    {ms:include filename=head-file.htm/}
+    <body>
+		{ms:include filename=head.htm/}
+        <div class="ms-banner">
+            <img src="{ms:globalskin.url/}/images/case.png" class="am-img-responsive" alt=""/>
+        </div>
+        <div class="ms-news-list">
+            <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+                <div class="am-list-news-bd">
+                    <ul class="am-list">
+                        {ms:arclist typeid=59 ispaging=true}
+	                        <li class="am-g am-list-item-dated">
+	                            <a href="[field.link/]" class="am-list-item-hd ">[field.title/]</a>
+	                            <span class="am-list-date">[field.date fmt=yyyy-MM-dd/]</span>
+	                        </li>
+                       {/ms:arclist}
+                    </ul>
+                    <ul data-am-widget="pagination" class="am-pagination am-pagination-default ms-news-list-page">
+                        <li class="am-pagination-first ">
+                            <a href="{ms:page.index/}" class="">第一页</a>
+                        </li>
+                        <li class="am-pagination-prev ">
+                            <a href="{ms:page.pre/}	" class="">上一页</a>
+                        </li>
+                        <li class="am-pagination-next ">
+                            <a href="{ms:page.next/}" class="">下一页</a>
+                        </li>
+                        <li class="am-pagination-last ">
+                            <a href="{ms:page.last/}" class="">最末页</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {ms:include filename=footer.htm/}
+    </body>
+</html>
