@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mingsoft.cms.plugin.ken.dao.ICloumnKenDao">
+	
+	<sql id="column_list">
+		co.column_category_id,co.column_keyword,co.column_descrip,co.column_type,co.column_url,co.column_listurl,co.column_cm_id,co.column_path,
+		ca.category_id,ca.category_parent_id,ca.category_title,ca.category_sort,ca.category_datetime,ca.category_managerid,ca.category_appid,ca.category_modelid,ca.category_categoryid,ca.category_smallimg
+	</sql>
+	
+	<!-- 字段绑定  开始 -->
+	<resultMap type="com.mingsoft.basic.entity.ColumnEntity" id="resultMap">
+		<id column="column_category_id" property="categoryId"/><!-- 与Category类别类绑定ID -->
+		<result column="column_keyword" property="columnKeyword"/><!-- 栏目简介-->
+		<result column="column_descrip" property="columnDescrip"/><!-- 栏目简介扩展-->
+		<result column="column_type" property="columnType"/><!--栏目属性 -->
+		<result column="column_url" property="columnUrl"/><!-- 连接地址 -->
+		<result column="column_listurl" property="columnListUrl"/><!-- 最终栏目列表地址 -->
+		<result column="column_cm_id" property="columnContentModelId"/><!-- 栏目类型 -->
+		<result column="column_path" property="columnPath"/><!-- 栏目路径 -->
+		<result column="category_id" property="categoryId"/><!-- 类别ID -->
+		<result column="category_title" property="categoryTitle"/><!-- 类别标题 -->
+		<result column="category_sort" property="categorySort"/><!-- 类别排序 -->
+		<result column="category_datetime" property="categoryDateTime"/><!-- 类别发布时间-->
+		<result column="category_managerid" property="categoryManagerId"/><!-- 类别发布者ID -->
+		<result column="category_modelid" property="categoryModelId"/><!-- 类别所属模块ID -->
+		<result column="category_categoryid" property="categoryCategoryId"/><!-- 父类别ID -->
+		<result column="category_smallimg" property="categorySmallImg"/><!-- 略缩图 -->
+		<result column="category_appid" property="appId"/><!-- 所属站点ID -->
+	</resultMap>
+		
+<!-- 根据站点Id查询栏目，返回该父栏目ID为categoryCategoryId的栏目集合开始 -->
+	<select id="queryChild" resultMap="resultMap" >
+		select
+		<include refid="column_list"/>
+		from basic_column co left join category ca on co.column_category_id=ca.category_id where ca.category_appid=#{appId}
+		<if test="modelId!=null">
+		 and ca.category_modelId=#{modelId}
+		</if> 
+		<if test="categoryCategoryId > 0">
+		  and ca.category_categoryid=#{categoryCategoryId}
+		</if> 
+		<if test="categoryCategoryId == 0">
+		  and ca.category_categoryid is null or ca.category_categoryid=#{categoryCategoryId}
+		</if> 
+		order by ca.CATEGORY_SORT desc,ca.category_id desc
+		<if test="size!=null and startNum!=null">
+			limit ${startNum}, ${size}
+		</if>
+		<if test="size!=null and startNum==null">
+			limit ${size}
+		</if>
+	</select>
+	<!-- 根据站点Id查询栏目，返回该父栏目ID为categoryCategoryId的栏目集合结束 -->
+	
+	
+		<!-- 获取当前应用下面对应模块的所以栏目分类 -->
+	<select id="queryByAppIdAndModelId"  resultMap="resultMap" >
+		select
+		<include refid="column_list"/>
+		from basic_column co left join category ca on ca.category_id=co.column_category_id 
+		where 
+			ca.category_appId=#{appId} and 
+			ca.category_modelId=#{modelId} 
+			and ca.del=0 ORDER BY category_sort desc
+		<if test="size!=null and startNum==null">
+			limit ${size}
+		</if>
+		<if test="size!=null and startNum!=null">
+			limit ${startNum}, ${size}
+		</if>
+	</select>
+	
+	
+</mapper>

@@ -22,10 +22,6 @@ The MIT License (MIT) * Copyright (c) 2016 铭飞科技(mingsoft.net)
 package com.mingsoft.cms.action;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,7 +43,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
-import com.mingsoft.basic.constant.Const;
 import com.mingsoft.basic.action.BaseAction;
 import com.mingsoft.basic.biz.IAppBiz;
 import com.mingsoft.basic.biz.IColumnBiz;
@@ -60,6 +55,8 @@ import com.mingsoft.cms.constant.ModelCode;
 import com.mingsoft.cms.constant.e.ColumnTypeEnum;
 import com.mingsoft.cms.entity.ArticleEntity;
 import com.mingsoft.cms.parser.CmsParser;
+import com.mingsoft.cms.plugin.ken.constant.ConditionFilterConstant;
+import com.mingsoft.cms.plugin.ken.service.IColumnBizKen;
 import com.mingsoft.parser.IParserRegexConstant;
 import com.mingsoft.util.FileUtil;
 import com.mingsoft.util.StringUtil;
@@ -105,6 +102,10 @@ public class GeneraterAction extends BaseAction {
 	@Autowired
 	private IModelBiz modelBiz;
 
+	
+	@Autowired
+	private IColumnBizKen columnBizKen;
+	
 	/**
 	 * 文章解析器
 	 */
@@ -227,7 +228,8 @@ public class GeneraterAction extends BaseAction {
 		} else {
 			
 			//获取所有的内容管理栏目
-			columns = columnBiz.queryAll(app.getAppId(),modelId);
+			columns = columnBiz.queryAll(app.getAppId(), modelId);
+			
 		}
 		// 获取栏目列表模版
 		for (ColumnEntity column : columns) {

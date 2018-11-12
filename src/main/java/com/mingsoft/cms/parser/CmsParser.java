@@ -23,7 +23,6 @@ package com.mingsoft.cms.parser;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +58,8 @@ import com.mingsoft.cms.parser.impl.ArticleTypeTitleParser;
 import com.mingsoft.cms.parser.impl.ChannelParser;
 import com.mingsoft.cms.parser.impl.ColumnParser;
 import com.mingsoft.cms.parser.impl.HitParser;
+import com.mingsoft.cms.plugin.ken.constant.ConditionFilterConstant;
+import com.mingsoft.cms.plugin.ken.service.IColumnBizKen;
 import com.mingsoft.cms.util.ArrysUtil;
 import com.mingsoft.mdiy.biz.IContentModelBiz;
 import com.mingsoft.mdiy.biz.IContentModelFieldBiz;
@@ -101,7 +102,13 @@ public class CmsParser extends IGeneralParser {
 	 */
 	@Autowired
 	private IColumnBiz columnBiz;
-
+	
+	/**
+	 * 栏目业务层 by ken
+	 */
+	@Autowired
+	private IColumnBizKen columnBizKen;
+	
 	/**
 	 * 新增字段业务层 
 	 */
@@ -593,7 +600,16 @@ public class CmsParser extends IGeneralParser {
 				// 替换完栏目标签后的HTML代码
 				channel = htmlContent;
 			} else {
-				categoryList = columnBiz.queryChild(tempColumnId, app.getAppId(),modelId,_size);
+				Map<String, Object> condition = new HashMap<>();
+				condition.put("categoryCategoryId", tempColumnId);
+				condition.put("appId", app.getAppId());
+				condition.put("modelId", modelId);
+				condition.put(ConditionFilterConstant.Page.SIZE, _size);
+				condition.put(ConditionFilterConstant.Page.START_NUM, mapProperty.get(ConditionFilterConstant.CHANNEL_START_NUM));
+				
+//				condition.put("condition", tempColumnId);
+				categoryList = columnBizKen.queryChild(condition);
+//				categoryList = columnBiz.queryChild(tempColumnId, app.getAppId(),modelId,_size);
 				// 替换栏目标签
 				htmlContent = new ChannelParser(channel, categoryList, this.getWebsiteUrl()).parse();
 				// 替换完栏目标签后的HTML代码

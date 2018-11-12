@@ -16,50 +16,25 @@
                 </div>
             </div>
             <style type="text/css">
+                .ken-control>div:nth-child(1n+2):nth-child(-1n+9){
+                    width: 25%;
+                }
 
-	            @media screen and (min-width: 768px) {
-	                .ken-control>div:nth-child(1n+2):nth-child(-1n+9){
-	                    width: 25%;
-	                }
-	
-	                .ken-control>div:first-child{
-	                    width: 50%;
-	                }
-	                .ken-control>div>div.thumbnail{
-	                    margin-bottom: 0;
-	                }
-	                .ken-control>div:first-child>div.thumbnail>a>img{
-	                    width: 560px;
-	                    height: 349px;
-	                }
-	            }
-	            
-	            
-            .ken-projects>.special:nth-child(2n+1){
-                padding-right: 0px;
-            }
-
-            body > section.wrap.wrap_gray > div > div > div.col-sm-9.projects.ken-projects > div:nth-child(2n+1) > div
-            {
-                margin-right: 0;
-            }
+                .ken-control>div:first-child{
+                    width: 50%;
+                }
+                .ken-control>div>div.thumbnail{
+                    margin-bottom: 0;
+                }
+                .ken-control>div:first-child>div.thumbnail>a>img{
+                    width: 560px;
+                    height: 349px;
+                }
 
             </style>
             <div class="wrap wrap_gray pt20">
                 <div class="container">
                     <div class="row ken-control">
-                    
-                    <!-- 
-                    
-                    {ms:arclist startNum=2 size=5 titlelen=45 typeid=151}
-						[field.title/]                    
-                    	[field.link/]
-                    	[field.litpic/]
-                    	[field.date fmt=yyyy-MM-dd/]
-                    	[field.hit/]
-                    {/ms:arclist}
-                    
-                     -->
                         <div class="col-sm-6">
                             <div class="thumbnail">
                                 <a href="news.html" class="thumbnail__link">
@@ -71,15 +46,7 @@
                                         <a href="news.html" class="news__link">
                                             <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
                                         </a>
-                                        <p class="news__desc">
-                                         {ms:arclist startNum=2 size=5 titlelen=45 typeid=151}
-											[field.title/]                    
-					                    	[field.link/]
-					                    	{ms:global.host/}[field.litpic/]
-					                    	[field.date fmt=yyyy-MM-dd/]
-					                    	[field.hit/]
-					                    {/ms:arclist}
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <p class="news__desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     </div>
                                     <div class="posted">
                                         <span class="posted__date">today, 12:30</span>
@@ -362,7 +329,7 @@
         <section class="wrap wrap_gray">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-9 projects ken-projects">
+                    <div class="col-sm-9 projects">
                         <div class="projects__title">
                             <h2 class="block-title__h2">Special project</h2>
                         </div>
@@ -406,7 +373,7 @@
                         <div class="banner">
                             <img src="{ms:globalskin.url/}img/content/banner.jpg" height="221" width="850" alt="image" class="banner__img">
                             <div class="banner__box">
-                                <p class="banner__text first-text">广告位</p>
+                                <p class="banner__text first-text">Advertising</p>
                                 <p class="banner__text second-text">Here</p>
                                 <a href="#" class="banner__link">Get Now</a>
                             </div>

@@ -71,13 +71,16 @@
 
 
 <!--                           <li class="active"> -->
-                                
-								{ms:channel}
-								    <li>
-                                    	<span class="wsmenu-click"></span>
-                                    	<a href="[field.typelink/]">[field.typetitle/]</a>
-                               		</li>
-								{/ms:channel}
+                               	<li>
+                                   	<span class="wsmenu-click"></span>
+                                   	<a href="{ms:global.host/}" title="{ms:global.keyword/}">首页</a>
+                             	</li>
+							{ms:channel type=level startNum=0 size=10 if(1 Equals 2?ok:no) if(我 In 我是中国人?是:不是)}
+							    <li>
+                                   	<span class="wsmenu-click"></span>
+                                   	<a href="[field.typelink/]">[field.typetitle/]</a>
+                              		</li>
+							{/ms:channel}
 
                                 <li>
                                     <span class="wsmenu-click"></span>

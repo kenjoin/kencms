@@ -30,7 +30,8 @@ import java.util.regex.Pattern;
 
 import com.alibaba.druid.util.StringUtils;
 import com.mingsoft.basic.entity.ColumnEntity;
-
+import com.mingsoft.cms.plugin.ken.Utils;
+import com.mingsoft.cms.plugin.ken.constant.ConditionFilterConstant;
 import com.mingsoft.parser.IParser;
 import com.mingsoft.parser.IParserRegexConstant;
 import com.mingsoft.util.RegexUtil;
@@ -375,6 +376,13 @@ public class ChannelParser extends IParser {
 		for (int i = 0; i < listPropertyName.size(); i++) {
 			listPropertyMap.put(listPropertyName.get(i).toString(), listPropertyValue.get(i).toString());
 		}
+		
+		List<String> conditions = Utils.parseAll(listProperty, ConditionFilterConstant.CHANNEL_PROPERTY_IF, 0);
+		
+		for(int i = 0; i < conditions.size(); i++) {
+			listPropertyMap.put(ConditionFilterConstant.CHANNEL_IF_KEY + i, conditions.get(i));
+		}
+		
 		return listPropertyMap;
 	}
 	// ——————————————————————————————————解析父标签中的属性结束——————————————————————————————————

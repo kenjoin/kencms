@@ -1849,6 +1849,13 @@ article .quote {
 .social__item .gplus:hover {
   opacity: .7;
 }
+
+.p_height_200{
+ height: 200px;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+        
 /* end social icons */
 
 /***********************************
